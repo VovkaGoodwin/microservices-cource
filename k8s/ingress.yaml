@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: root-ingress
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: "nginx"
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /auth(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: auth-bridge
+                port:
+                  number: 80
+          - path: /user(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: user-bridge
+                port:
+                  number: 80
+          - path: /message(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: message-bridge
+                port:
+                  number: 80
