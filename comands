@@ -1,0 +1,9 @@
+kubectl apply -f .\k8s\namespace.yaml
+kubectl apply -f .\k8s\deployment.yaml
+kubectl apply -f .\k8s\service.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.8.2/deploy/static/provider/cloud/deploy.yaml
+
+kubectl get pods -n auth
+
+kubectl describe pod auth-deployment-57c79544dd-kjh56 -n auth
+kubectl rollout restart deployment auth-deployment -n auth

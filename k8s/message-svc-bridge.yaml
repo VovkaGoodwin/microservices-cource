@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: message-bridge
+spec:
+  type: ExternalName
+  externalName: message-svc.message
