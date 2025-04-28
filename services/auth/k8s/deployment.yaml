@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-deployment
+  namespace: auth
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth-container
+          image: auth:latest
+          livenessProbe:
+            httpGet:
+              port: 8080
+              path: /liveness
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              port: 8080
+              path: /readiness
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          imagePullPolicy: "IfNotPresent"
+          ports:
+            - containerPort: 8080
+        - name: postgres
+          image: postgres:16-bookworm
+          readinessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - "pg_isready --quiet -U $POSTGRES_USER -d postgres"
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          ports:
+            - containerPort: 5432
+          env:
+            - name: POSTGRES_USER
+              value: "root"
+            - name: POSTGRES_PASSWORD
+              value: "123456"
+            - name: POSTGRES_DB
+              value: "auth"
+            - name: POSTGRES_HOST_AUTH_METHOD
+              value: "trust"
+        - name: redis
+          image: redis:7.4-bookworm
+          ports:
+            - containerPort: 6379
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
