@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package auth;
+
+option go_package = "auth/proto";
+
+service AuthService {
+  rpc CheckToken (CheckTokenRequest) returns (CheckTokenResponse);
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message CheckTokenRequest {
+  string token = 1;
+}
+
+message CheckTokenResponse {
+  bool valid = 1;
+  string user_id = 2;
+  string error_message = 3;
+}
+
+message PingRequest {
+
+}
+
+message PingResponse {
+  string message = 1;
+}

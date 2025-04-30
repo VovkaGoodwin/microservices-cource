@@ -10,24 +10,10 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /auth(/|$)(.*)
+          - path: /api(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
-                name: auth-bridge
-                port:
-                  number: 80
-          - path: /user(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: user-bridge
-                port:
-                  number: 80
-          - path: /message(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: message-bridge
+                name: gateway-svc
                 port:
                   number: 80

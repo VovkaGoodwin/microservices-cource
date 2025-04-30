@@ -15,5 +15,5 @@ func main() {
 
 	mainApp := app.New(ctx, cfg)
 
-	mainApp.Start(ctx)
+	mainApp.Start(ctx, cfg)
 }

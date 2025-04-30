@@ -10,11 +10,17 @@ import (
 const configPath = "./auth.yaml"
 
 type Config struct {
-	Env        string     `yaml:"env" env-default:"production"`
-	HTTPServer HTTPServer `yaml:"http_server"`
-	DB         DB         `yaml:"db"`
-	JWT        JWT        `yaml:"jwt"`
-	Migrations Migrations `yaml:"migrations"`
+	Env         string      `yaml:"env" env-default:"production"`
+	HTTPServer  HTTPServer  `yaml:"http_server"`
+	GRPCSServer GRPCSServer `yaml:"grpc_server"`
+	DB          DB          `yaml:"db"`
+	JWT         JWT         `yaml:"jwt"`
+	Migrations  Migrations  `yaml:"migrations"`
+}
+
+type GRPCSServer struct {
+	Network string `yaml:"network" env-default:"tcp"`
+	Port    string `yaml:"port" env-default:"50051"`
 }
 
 type DB struct {

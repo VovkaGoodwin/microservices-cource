@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package message;
+
+option go_package = "message/proto";
+
+service MessageService {
+  rpc GetMessagesByUserId (GetMessagesByUserIdRequest) returns (GetMessagesByUserIdResponse);
+  rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message TextItem {
+  string id = 1;
+  string text = 2;
+}
+
+message GetMessagesByUserIdRequest {
+  string user_id = 1;
+}
+
+message GetMessagesByUserIdResponse {
+  repeated TextItem messages = 1;
+}
+
+message PingRequest {}
+
+message PingResponse {
+  string message = 1;
+}
+
+message SendMessageRequest {
+  string user_id = 1;
+  string text = 2;
+}
+
+message SendMessageResponse {
+  bool success = 1;
+}
