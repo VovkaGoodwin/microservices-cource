@@ -22,8 +22,9 @@ const (
 )
 
 type CheckTokenRequest struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// токен на проверку
+	Token         string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -66,10 +67,11 @@ func (x *CheckTokenRequest) GetToken() string {
 }
 
 type CheckTokenResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Valid         bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
-	UserId        string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	ErrorMessage  string                 `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
+	state  protoimpl.MessageState `protogen:"open.v1"`
+	Valid  bool                   `protobuf:"varint,1,opt,name=valid,proto3" json:"valid,omitempty"`
+	UserId string                 `protobuf:"bytes,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	// ошибки которые могли возникнуть в процессе проверки токена
+	ErrorMessage  string `protobuf:"bytes,3,opt,name=error_message,json=errorMessage,proto3" json:"error_message,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -205,6 +207,102 @@ func (x *PingResponse) GetMessage() string {
 	return ""
 }
 
+type AuthenticateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Username      string                 `protobuf:"bytes,1,opt,name=username,proto3" json:"username,omitempty"`
+	Password      string                 `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuthenticateRequest) Reset() {
+	*x = AuthenticateRequest{}
+	mi := &file_auth_proto_msgTypes[4]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthenticateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticateRequest) ProtoMessage() {}
+
+func (x *AuthenticateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[4]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticateRequest.ProtoReflect.Descriptor instead.
+func (*AuthenticateRequest) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *AuthenticateRequest) GetUsername() string {
+	if x != nil {
+		return x.Username
+	}
+	return ""
+}
+
+func (x *AuthenticateRequest) GetPassword() string {
+	if x != nil {
+		return x.Password
+	}
+	return ""
+}
+
+type AuthenticateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Token         string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AuthenticateResponse) Reset() {
+	*x = AuthenticateResponse{}
+	mi := &file_auth_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AuthenticateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AuthenticateResponse) ProtoMessage() {}
+
+func (x *AuthenticateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_auth_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AuthenticateResponse.ProtoReflect.Descriptor instead.
+func (*AuthenticateResponse) Descriptor() ([]byte, []int) {
+	return file_auth_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *AuthenticateResponse) GetToken() string {
+	if x != nil {
+		return x.Token
+	}
+	return ""
+}
+
 var File_auth_proto protoreflect.FileDescriptor
 
 const file_auth_proto_rawDesc = "" +
@@ -219,10 +317,16 @@ const file_auth_proto_rawDesc = "" +
 	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"\r\n" +
 	"\vPingRequest\"(\n" +
 	"\fPingResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2\xdb\x02\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"M\n" +
+	"\x13AuthenticateRequest\x12\x1a\n" +
+	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
+	"\bpassword\x18\x02 \x01(\tR\bpassword\",\n" +
+	"\x14AuthenticateResponse\x12\x14\n" +
+	"\x05token\x18\x01 \x01(\tR\x05token2\x91\x04\n" +
 	"\vAuthService\x12\xad\x01\n" +
 	"\n" +
-	"CheckToken\x12N.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest\x1aO.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse\x12\x9b\x01\n" +
+	"CheckToken\x12N.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest\x1aO.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse\x12\xb3\x01\n" +
+	"\fAuthenticate\x12P.github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateRequest\x1aQ.github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateResponse\x12\x9b\x01\n" +
 	"\x04Ping\x12H.github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest\x1aI.github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponseB\x19Z\x17auth/pkg/proto/api/authb\x06proto3"
 
 var (
@@ -237,20 +341,24 @@ func file_auth_proto_rawDescGZIP() []byte {
 	return file_auth_proto_rawDescData
 }
 
-var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
+var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_auth_proto_goTypes = []any{
-	(*CheckTokenRequest)(nil),  // 0: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest
-	(*CheckTokenResponse)(nil), // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
-	(*PingRequest)(nil),        // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
-	(*PingResponse)(nil),       // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
+	(*CheckTokenRequest)(nil),    // 0: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest
+	(*CheckTokenResponse)(nil),   // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
+	(*PingRequest)(nil),          // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
+	(*PingResponse)(nil),         // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
+	(*AuthenticateRequest)(nil),  // 4: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateRequest
+	(*AuthenticateResponse)(nil), // 5: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateResponse
 }
 var file_auth_proto_depIdxs = []int32{
 	0, // 0: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.CheckToken:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest
-	2, // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
-	1, // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.CheckToken:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
-	3, // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Authenticate:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateRequest
+	2, // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
+	1, // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.CheckToken:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
+	5, // 4: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Authenticate:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthenticateResponse
+	3, // 5: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
+	3, // [3:6] is the sub-list for method output_type
+	0, // [0:3] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -267,7 +375,7 @@ func file_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_auth_proto_rawDesc), len(file_auth_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

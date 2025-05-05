@@ -7,6 +7,7 @@ option go_package = "auth/pkg/proto/api/auth";
 service AuthService {
   // Проверка валидности токена
   rpc CheckToken (CheckTokenRequest) returns (CheckTokenResponse);
+  rpc Authenticate (AuthenticateRequest) returns (AuthenticateResponse);
   // Проверка работоспособности сервиса
   rpc Ping (PingRequest) returns (PingResponse);
 }
@@ -29,4 +30,13 @@ message PingRequest {
 
 message PingResponse {
   string message = 1;
+}
+
+message AuthenticateRequest {
+  string username = 1;
+  string password = 2;
+}
+
+message AuthenticateResponse {
+  string token = 1;
 }

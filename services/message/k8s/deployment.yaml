@@ -22,7 +22,7 @@ spec:
           livenessProbe:
             httpGet:
               port: 8080
-              path: /ping
+              path: /liveness
           ports:
             - containerPort: 8080
   strategy:
