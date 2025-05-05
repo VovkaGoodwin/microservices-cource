@@ -2,8 +2,9 @@ package interactors
 
 import (
 	"context"
+
 	"gateway/internal/app/application/dto"
-	user "gateway/proto/user"
+	"gateway/proto/user"
 )
 
 type User struct {

@@ -1,11 +1,13 @@
 syntax = "proto3";
 
-package user;
+package github.com.vovkagoodwin.microservices_cource.proto.api.user;
 
-option go_package = "user/proto";
+option go_package = "user/pkg/proto/api/user";
 
 service UserService {
+  // получить информацию оюзере по его id
   rpc GetUserById (GetUserRequest) returns (GetUserResponse);
+  // Проверка работоспособности сервиса
   rpc Ping (PingRequest) returns (PingResponse);
 }
 

@@ -2,13 +2,15 @@ package grpc_clients
 
 import (
 	"context"
-	proto "gateway/proto/user"
+	"log"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
+
+	"gateway/proto/user"
 )
 
-func NewUserClient() proto.UserServiceClient {
+func NewUserClient() user.UserServiceClient {
 	opts := grpc.WithTransportCredentials(insecure.NewCredentials())
 	conn, err := grpc.NewClient("user-svc.user.svc.cluster.local:50051", opts)
 	if err != nil {
@@ -16,8 +18,8 @@ func NewUserClient() proto.UserServiceClient {
 		return nil
 	}
 
-	client := proto.NewUserServiceClient(conn)
-	_, err = client.Ping(context.Background(), &proto.PingRequest{})
+	client := user.NewUserServiceClient(conn)
+	_, err = client.Ping(context.Background(), &user.PingRequest{})
 	if err != nil {
 		log.Fatalf("error pinging auth service: %v", err)
 		return nil

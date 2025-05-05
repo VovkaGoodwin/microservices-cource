@@ -4,7 +4,7 @@
 // 	protoc        v5.27.1
 // source: auth.proto
 
-package proto
+package auth
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -210,7 +210,7 @@ var File_auth_proto protoreflect.FileDescriptor
 const file_auth_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"auth.proto\x12\x04auth\")\n" +
+	"auth.proto\x12;github.com.vovkagoodwin.microservices_cource.proto.api.auth\")\n" +
 	"\x11CheckTokenRequest\x12\x14\n" +
 	"\x05token\x18\x01 \x01(\tR\x05token\"h\n" +
 	"\x12CheckTokenResponse\x12\x14\n" +
@@ -219,12 +219,11 @@ const file_auth_proto_rawDesc = "" +
 	"\rerror_message\x18\x03 \x01(\tR\ferrorMessage\"\r\n" +
 	"\vPingRequest\"(\n" +
 	"\fPingResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2}\n" +
-	"\vAuthService\x12?\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\xdb\x02\n" +
+	"\vAuthService\x12\xad\x01\n" +
 	"\n" +
-	"CheckToken\x12\x17.auth.CheckTokenRequest\x1a\x18.auth.CheckTokenResponse\x12-\n" +
-	"\x04Ping\x12\x11.auth.PingRequest\x1a\x12.auth.PingResponseB\fZ\n" +
-	"auth/protob\x06proto3"
+	"CheckToken\x12N.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest\x1aO.github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse\x12\x9b\x01\n" +
+	"\x04Ping\x12H.github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest\x1aI.github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponseB\x19Z\x17auth/pkg/proto/api/authb\x06proto3"
 
 var (
 	file_auth_proto_rawDescOnce sync.Once
@@ -240,16 +239,16 @@ func file_auth_proto_rawDescGZIP() []byte {
 
 var file_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_auth_proto_goTypes = []any{
-	(*CheckTokenRequest)(nil),  // 0: auth.CheckTokenRequest
-	(*CheckTokenResponse)(nil), // 1: auth.CheckTokenResponse
-	(*PingRequest)(nil),        // 2: auth.PingRequest
-	(*PingResponse)(nil),       // 3: auth.PingResponse
+	(*CheckTokenRequest)(nil),  // 0: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest
+	(*CheckTokenResponse)(nil), // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
+	(*PingRequest)(nil),        // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
+	(*PingResponse)(nil),       // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
 }
 var file_auth_proto_depIdxs = []int32{
-	0, // 0: auth.AuthService.CheckToken:input_type -> auth.CheckTokenRequest
-	2, // 1: auth.AuthService.Ping:input_type -> auth.PingRequest
-	1, // 2: auth.AuthService.CheckToken:output_type -> auth.CheckTokenResponse
-	3, // 3: auth.AuthService.Ping:output_type -> auth.PingResponse
+	0, // 0: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.CheckToken:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenRequest
+	2, // 1: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingRequest
+	1, // 2: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.CheckToken:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.CheckTokenResponse
+	3, // 3: github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService.Ping:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.auth.PingResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

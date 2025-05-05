@@ -12,7 +12,7 @@ import (
 	"google.golang.org/grpc"
 
 	"message/internal/app"
-	"message/proto"
+	pb "message/proto"
 )
 
 func main() {
@@ -31,7 +31,7 @@ func main() {
 	grpcHandler := app.NewGrpcHandler()
 
 	server := grpc.NewServer()
-	proto.RegisterMessageServiceServer(server, grpcHandler)
+	pb.RegisterMessageServiceServer(server, grpcHandler)
 
 	go func() {
 		lis, err := net.Listen("tcp", ":50051")

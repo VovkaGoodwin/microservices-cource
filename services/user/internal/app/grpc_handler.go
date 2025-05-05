@@ -2,25 +2,26 @@ package app
 
 import (
 	"context"
-	"user/proto"
+
+	pb "user/proto"
 )
 
 type GrpcServer struct {
-	proto.UnimplementedUserServiceServer
+	pb.UnimplementedUserServiceServer
 }
 
 func NewGrpcHandler() *GrpcServer {
 	return &GrpcServer{}
 }
 
-func (g *GrpcServer) Ping(ctx context.Context, req *proto.PingRequest) (*proto.PingResponse, error) {
-	return &proto.PingResponse{
+func (g *GrpcServer) Ping(_ context.Context, _ *pb.PingRequest) (*pb.PingResponse, error) {
+	return &pb.PingResponse{
 		Message: "pong",
 	}, nil
 }
 
-func (g *GrpcServer) GetUserById(context.Context, *proto.GetUserRequest) (*proto.GetUserResponse, error) {
-	return &proto.GetUserResponse{
+func (g *GrpcServer) GetUserById(context.Context, *pb.GetUserRequest) (*pb.GetUserResponse, error) {
+	return &pb.GetUserResponse{
 		UserId:       "123456",
 		LastActivity: "25-05-2025",
 		IsActive:     true,

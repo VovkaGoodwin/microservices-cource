@@ -4,7 +4,7 @@
 // 	protoc        v5.27.1
 // source: user.proto
 
-package proto
+package user
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -226,7 +226,7 @@ var File_user_proto protoreflect.FileDescriptor
 const file_user_proto_rawDesc = "" +
 	"\n" +
 	"\n" +
-	"user.proto\x12\x04user\")\n" +
+	"user.proto\x12;github.com.vovkagoodwin.microservices_cource.proto.api.user\")\n" +
 	"\x0eGetUserRequest\x12\x17\n" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\"\xa8\x01\n" +
 	"\x0fGetUserResponse\x12\x17\n" +
@@ -238,11 +238,10 @@ const file_user_proto_rawDesc = "" +
 	"\rlast_activity\x18\x05 \x01(\tR\flastActivity\"\r\n" +
 	"\vPingRequest\"(\n" +
 	"\fPingResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2x\n" +
-	"\vUserService\x12:\n" +
-	"\vGetUserById\x12\x14.user.GetUserRequest\x1a\x15.user.GetUserResponse\x12-\n" +
-	"\x04Ping\x12\x11.user.PingRequest\x1a\x12.user.PingResponseB\fZ\n" +
-	"user/protob\x06proto3"
+	"\amessage\x18\x01 \x01(\tR\amessage2\xd6\x02\n" +
+	"\vUserService\x12\xa8\x01\n" +
+	"\vGetUserById\x12K.github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserRequest\x1aL.github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserResponse\x12\x9b\x01\n" +
+	"\x04Ping\x12H.github.com.vovkagoodwin.microservices_cource.proto.api.user.PingRequest\x1aI.github.com.vovkagoodwin.microservices_cource.proto.api.user.PingResponseB\x19Z\x17user/pkg/proto/api/userb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once
@@ -258,16 +257,16 @@ func file_user_proto_rawDescGZIP() []byte {
 
 var file_user_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_user_proto_goTypes = []any{
-	(*GetUserRequest)(nil),  // 0: user.GetUserRequest
-	(*GetUserResponse)(nil), // 1: user.GetUserResponse
-	(*PingRequest)(nil),     // 2: user.PingRequest
-	(*PingResponse)(nil),    // 3: user.PingResponse
+	(*GetUserRequest)(nil),  // 0: github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserRequest
+	(*GetUserResponse)(nil), // 1: github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserResponse
+	(*PingRequest)(nil),     // 2: github.com.vovkagoodwin.microservices_cource.proto.api.user.PingRequest
+	(*PingResponse)(nil),    // 3: github.com.vovkagoodwin.microservices_cource.proto.api.user.PingResponse
 }
 var file_user_proto_depIdxs = []int32{
-	0, // 0: user.UserService.GetUserById:input_type -> user.GetUserRequest
-	2, // 1: user.UserService.Ping:input_type -> user.PingRequest
-	1, // 2: user.UserService.GetUserById:output_type -> user.GetUserResponse
-	3, // 3: user.UserService.Ping:output_type -> user.PingResponse
+	0, // 0: github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService.GetUserById:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserRequest
+	2, // 1: github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService.Ping:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.user.PingRequest
+	1, // 2: github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService.GetUserById:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.user.GetUserResponse
+	3, // 3: github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService.Ping:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.user.PingResponse
 	2, // [2:4] is the sub-list for method output_type
 	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name

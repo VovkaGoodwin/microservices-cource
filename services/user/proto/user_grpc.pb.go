@@ -4,7 +4,7 @@
 // - protoc             v5.27.1
 // source: user.proto
 
-package proto
+package user
 
 import (
 	context "context"
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	UserService_GetUserById_FullMethodName = "/user.UserService/GetUserById"
-	UserService_Ping_FullMethodName        = "/user.UserService/Ping"
+	UserService_GetUserById_FullMethodName = "/github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService/GetUserById"
+	UserService_Ping_FullMethodName        = "/github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService/Ping"
 )
 
 // UserServiceClient is the client API for UserService service.
@@ -142,7 +142,7 @@ func _UserService_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var UserService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "user.UserService",
+	ServiceName: "github.com.vovkagoodwin.microservices_cource.proto.api.user.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

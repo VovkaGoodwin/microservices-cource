@@ -2,10 +2,12 @@ package grpc_clients
 
 import (
 	"context"
-	auth "gateway/proto/auth"
+	"log"
+
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"log"
+
+	"gateway/proto/auth"
 )
 
 func NewAuthClient() auth.AuthServiceClient {

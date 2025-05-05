@@ -4,7 +4,7 @@
 // - protoc             v5.27.1
 // source: auth.proto
 
-package proto
+package auth
 
 import (
 	context "context"
@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_CheckToken_FullMethodName = "/auth.AuthService/CheckToken"
-	AuthService_Ping_FullMethodName       = "/auth.AuthService/Ping"
+	AuthService_CheckToken_FullMethodName = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/CheckToken"
+	AuthService_Ping_FullMethodName       = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/Ping"
 )
 
 // AuthServiceClient is the client API for AuthService service.
@@ -142,7 +142,7 @@ func _AuthService_Ping_Handler(srv interface{}, ctx context.Context, dec func(in
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var AuthService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "auth.AuthService",
+	ServiceName: "github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService",
 	HandlerType: (*AuthServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

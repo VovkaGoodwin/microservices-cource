@@ -1,12 +1,15 @@
 syntax = "proto3";
 
-package message;
+package github.com.vovkagoodwin.microservices_cource.proto.api.message;
 
-option go_package = "message/proto";
+option go_package = "message/pkg/proto/api/message";
 
 service MessageService {
+  // получить сообщения пользователя по его id
   rpc GetMessagesByUserId (GetMessagesByUserIdRequest) returns (GetMessagesByUserIdResponse);
+  // отправить сообщение
   rpc SendMessage (SendMessageRequest) returns (SendMessageResponse);
+  // Проверка работоспособности сервиса
   rpc Ping (PingRequest) returns (PingResponse);
 }
 

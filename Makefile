@@ -58,10 +58,10 @@ build-images: build-auth build-user build-message build-gateway
 
 .PHONY: proto
 proto:
-	@protoc --proto_path=proto --go_out=./services/auth/proto --go_opt=paths=source_relative --go-grpc_out=./services/auth/proto --go-grpc_opt=paths=source_relative auth.proto
-	@protoc --proto_path=proto --go_out=./services/gateway/proto/auth --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/auth --go-grpc_opt=paths=source_relative auth.proto
-	@protoc --proto_path=proto --go_out=./services/user/proto --go_opt=paths=source_relative --go-grpc_out=./services/user/proto --go-grpc_opt=paths=source_relative user.proto
-	@protoc --proto_path=proto --go_out=./services/gateway/proto/user --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/user --go-grpc_opt=paths=source_relative user.proto
-	@protoc --proto_path=proto --go_out=./services/message/proto --go_opt=paths=source_relative --go-grpc_out=./services/message/proto --go-grpc_opt=paths=source_relative message.proto
-	@protoc --proto_path=proto --go_out=./services/gateway/proto/message --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/message --go-grpc_opt=paths=source_relative message.proto
+	@protoc --proto_path=proto/api/auth --go_out=./services/auth/proto --go_opt=paths=source_relative --go-grpc_out=./services/auth/proto --go-grpc_opt=paths=source_relative auth.proto
+	@protoc --proto_path=proto/api/auth --go_out=./services/gateway/proto/auth --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/auth --go-grpc_opt=paths=source_relative auth.proto
+	@protoc --proto_path=proto/api/user --go_out=./services/user/proto --go_opt=paths=source_relative --go-grpc_out=./services/user/proto --go-grpc_opt=paths=source_relative user.proto
+	@protoc --proto_path=proto/api/user --go_out=./services/gateway/proto/user --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/user --go-grpc_opt=paths=source_relative user.proto
+	@protoc --proto_path=proto/api/message --go_out=./services/message/proto --go_opt=paths=source_relative --go-grpc_out=./services/message/proto --go-grpc_opt=paths=source_relative message.proto
+	@protoc --proto_path=proto/api/message --go_out=./services/gateway/proto/message --go_opt=paths=source_relative --go-grpc_out=./services/gateway/proto/message --go-grpc_opt=paths=source_relative message.proto
 

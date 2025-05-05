@@ -2,15 +2,17 @@ package main
 
 import (
 	"context"
-	"google.golang.org/grpc"
 	"log"
 	"net"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"google.golang.org/grpc"
+
 	"user/internal/app"
-	"user/proto"
+	pb "user/proto"
 )
 
 func main() {
@@ -29,7 +31,7 @@ func main() {
 	grpcHandler := app.NewGrpcHandler()
 
 	server := grpc.NewServer()
-	proto.RegisterUserServiceServer(server, grpcHandler)
+	pb.RegisterUserServiceServer(server, grpcHandler)
 
 	go func() {
 		lis, err := net.Listen("tcp", ":50051")

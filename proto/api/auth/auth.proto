@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package github.com.vovkagoodwin.microservices_cource.proto.api.auth;
+
+option go_package = "auth/pkg/proto/api/auth";
+
+service AuthService {
+  // Проверка валидности токена
+  rpc CheckToken (CheckTokenRequest) returns (CheckTokenResponse);
+  // Проверка работоспособности сервиса
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message CheckTokenRequest {
+  // токен на проверку
+  string token = 1;
+}
+
+message CheckTokenResponse {
+  bool valid = 1;
+  string user_id = 2;
+  // ошибки которые могли возникнуть в процессе проверки токена
+  string error_message = 3;
+}
+
+message PingRequest {
+
+}
+
+message PingResponse {
+  string message = 1;
+}

@@ -4,7 +4,7 @@
 // 	protoc        v5.27.1
 // source: message.proto
 
-package proto
+package message
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -341,14 +341,14 @@ var File_message_proto protoreflect.FileDescriptor
 
 const file_message_proto_rawDesc = "" +
 	"\n" +
-	"\rmessage.proto\x12\amessage\".\n" +
+	"\rmessage.proto\x12>github.com.vovkagoodwin.microservices_cource.proto.api.message\".\n" +
 	"\bTextItem\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\"5\n" +
 	"\x1aGetMessagesByUserIdRequest\x12\x17\n" +
-	"\auser_id\x18\x01 \x01(\tR\x06userId\"L\n" +
-	"\x1bGetMessagesByUserIdResponse\x12-\n" +
-	"\bmessages\x18\x01 \x03(\v2\x11.message.TextItemR\bmessages\"\r\n" +
+	"\auser_id\x18\x01 \x01(\tR\x06userId\"\x83\x01\n" +
+	"\x1bGetMessagesByUserIdResponse\x12d\n" +
+	"\bmessages\x18\x01 \x03(\v2H.github.com.vovkagoodwin.microservices_cource.proto.api.message.TextItemR\bmessages\"\r\n" +
 	"\vPingRequest\"(\n" +
 	"\fPingResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage\"A\n" +
@@ -356,11 +356,11 @@ const file_message_proto_rawDesc = "" +
 	"\auser_id\x18\x01 \x01(\tR\x06userId\x12\x12\n" +
 	"\x04text\x18\x02 \x01(\tR\x04text\"/\n" +
 	"\x13SendMessageResponse\x12\x18\n" +
-	"\asuccess\x18\x01 \x01(\bR\asuccess2\xf1\x01\n" +
-	"\x0eMessageService\x12`\n" +
-	"\x13GetMessagesByUserId\x12#.message.GetMessagesByUserIdRequest\x1a$.message.GetMessagesByUserIdResponse\x12H\n" +
-	"\vSendMessage\x12\x1b.message.SendMessageRequest\x1a\x1c.message.SendMessageResponse\x123\n" +
-	"\x04Ping\x12\x14.message.PingRequest\x1a\x15.message.PingResponseB\x0fZ\rmessage/protob\x06proto3"
+	"\asuccess\x18\x01 \x01(\bR\asuccess2\xbe\x04\n" +
+	"\x0eMessageService\x12\xce\x01\n" +
+	"\x13GetMessagesByUserId\x12Z.github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdRequest\x1a[.github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdResponse\x12\xb6\x01\n" +
+	"\vSendMessage\x12R.github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageRequest\x1aS.github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageResponse\x12\xa1\x01\n" +
+	"\x04Ping\x12K.github.com.vovkagoodwin.microservices_cource.proto.api.message.PingRequest\x1aL.github.com.vovkagoodwin.microservices_cource.proto.api.message.PingResponseB\x1fZ\x1dmessage/pkg/proto/api/messageb\x06proto3"
 
 var (
 	file_message_proto_rawDescOnce sync.Once
@@ -376,22 +376,22 @@ func file_message_proto_rawDescGZIP() []byte {
 
 var file_message_proto_msgTypes = make([]protoimpl.MessageInfo, 7)
 var file_message_proto_goTypes = []any{
-	(*TextItem)(nil),                    // 0: message.TextItem
-	(*GetMessagesByUserIdRequest)(nil),  // 1: message.GetMessagesByUserIdRequest
-	(*GetMessagesByUserIdResponse)(nil), // 2: message.GetMessagesByUserIdResponse
-	(*PingRequest)(nil),                 // 3: message.PingRequest
-	(*PingResponse)(nil),                // 4: message.PingResponse
-	(*SendMessageRequest)(nil),          // 5: message.SendMessageRequest
-	(*SendMessageResponse)(nil),         // 6: message.SendMessageResponse
+	(*TextItem)(nil),                    // 0: github.com.vovkagoodwin.microservices_cource.proto.api.message.TextItem
+	(*GetMessagesByUserIdRequest)(nil),  // 1: github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdRequest
+	(*GetMessagesByUserIdResponse)(nil), // 2: github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdResponse
+	(*PingRequest)(nil),                 // 3: github.com.vovkagoodwin.microservices_cource.proto.api.message.PingRequest
+	(*PingResponse)(nil),                // 4: github.com.vovkagoodwin.microservices_cource.proto.api.message.PingResponse
+	(*SendMessageRequest)(nil),          // 5: github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageRequest
+	(*SendMessageResponse)(nil),         // 6: github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageResponse
 }
 var file_message_proto_depIdxs = []int32{
-	0, // 0: message.GetMessagesByUserIdResponse.messages:type_name -> message.TextItem
-	1, // 1: message.MessageService.GetMessagesByUserId:input_type -> message.GetMessagesByUserIdRequest
-	5, // 2: message.MessageService.SendMessage:input_type -> message.SendMessageRequest
-	3, // 3: message.MessageService.Ping:input_type -> message.PingRequest
-	2, // 4: message.MessageService.GetMessagesByUserId:output_type -> message.GetMessagesByUserIdResponse
-	6, // 5: message.MessageService.SendMessage:output_type -> message.SendMessageResponse
-	4, // 6: message.MessageService.Ping:output_type -> message.PingResponse
+	0, // 0: github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdResponse.messages:type_name -> github.com.vovkagoodwin.microservices_cource.proto.api.message.TextItem
+	1, // 1: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.GetMessagesByUserId:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdRequest
+	5, // 2: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.SendMessage:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageRequest
+	3, // 3: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.Ping:input_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.PingRequest
+	2, // 4: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.GetMessagesByUserId:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.GetMessagesByUserIdResponse
+	6, // 5: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.SendMessage:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.SendMessageResponse
+	4, // 6: github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService.Ping:output_type -> github.com.vovkagoodwin.microservices_cource.proto.api.message.PingResponse
 	4, // [4:7] is the sub-list for method output_type
 	1, // [1:4] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name

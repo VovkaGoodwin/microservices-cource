@@ -4,7 +4,7 @@
 // - protoc             v5.27.1
 // source: message.proto
 
-package proto
+package message
 
 import (
 	context "context"
@@ -19,9 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	MessageService_GetMessagesByUserId_FullMethodName = "/message.MessageService/GetMessagesByUserId"
-	MessageService_SendMessage_FullMethodName         = "/message.MessageService/SendMessage"
-	MessageService_Ping_FullMethodName                = "/message.MessageService/Ping"
+	MessageService_GetMessagesByUserId_FullMethodName = "/github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService/GetMessagesByUserId"
+	MessageService_SendMessage_FullMethodName         = "/github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService/SendMessage"
+	MessageService_Ping_FullMethodName                = "/github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService/Ping"
 )
 
 // MessageServiceClient is the client API for MessageService service.
@@ -176,7 +176,7 @@ func _MessageService_Ping_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var MessageService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "message.MessageService",
+	ServiceName: "github.com.vovkagoodwin.microservices_cource.proto.api.message.MessageService",
 	HandlerType: (*MessageServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

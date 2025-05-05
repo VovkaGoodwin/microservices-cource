@@ -2,7 +2,8 @@ package interactors
 
 import (
 	"context"
-	auth "gateway/proto/auth"
+
+	"gateway/proto/auth"
 )
 
 type Auth struct {
