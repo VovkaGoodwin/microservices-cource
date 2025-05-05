@@ -1,0 +1,76 @@
+basePath: /api
+definitions:
+  http.sendMessageRequest:
+    properties:
+      text:
+        type: string
+      user_id:
+        type: string
+    required:
+    - text
+    - user_id
+    type: object
+host: localhost:80
+info:
+  contact: {}
+paths:
+  /auth/check_token:
+    get:
+      parameters:
+      - description: токен на проверку
+        in: query
+        name: token
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+  /auth/ping:
+    get:
+      produces:
+      - application/json
+      responses: {}
+  /messages:
+    get:
+      parameters:
+      - description: user id
+        in: query
+        name: user_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+    post:
+      parameters:
+      - description: сообщение
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/http.sendMessageRequest'
+      produces:
+      - application/json
+      responses: {}
+  /messages/ping:
+    get:
+      produces:
+      - application/json
+      responses: {}
+  /users/{id}:
+    get:
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+  /users/ping:
+    get:
+      produces:
+      - application/json
+      responses: {}
+swagger: "2.0"

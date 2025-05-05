@@ -1,15 +1,20 @@
 package app
 
 import (
-	"auth/internal/app/application/interactors"
-	"auth/internal/app/infrastructure/database"
-	"auth/internal/app/presentation/http_handler"
-	"auth/internal/config"
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/jmoiron/sqlx"
+	"google.golang.org/grpc"
+
+	"auth/internal/app/application/interactors"
+	"auth/internal/app/infrastructure/database"
+	"auth/internal/app/presentation/grpc_handler"
+	"auth/internal/app/presentation/http_handler"
+	"auth/internal/config"
+	pb "auth/proto"
 )
 
 const (
@@ -43,7 +48,7 @@ func initLog(cfg *config.Config) *slog.Logger {
 	return log
 }
 
-func initHandler(
+func initHttpHandler(
 	cfg *config.Config,
 	db *sqlx.DB,
 ) *gin.Engine {
@@ -64,6 +69,16 @@ func initHttpServer(cfg *config.Config, handler http.Handler) *http.Server {
 		Handler:      handler,
 	}
 
+	return server
+}
+
+func initRpcHandler(_ *config.Config) *grpc_handler.AuthServer {
+	return grpc_handler.NewAuthServer()
+}
+
+func initRpcServer(_ *config.Config, authServer *grpc_handler.AuthServer) *grpc.Server {
+	server := grpc.NewServer()
+	pb.RegisterAuthServiceServer(server, authServer)
 	return server
 }
 

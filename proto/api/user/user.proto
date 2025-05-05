@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package github.com.vovkagoodwin.microservices_cource.proto.api.user;
+
+option go_package = "user/pkg/proto/api/user";
+
+service UserService {
+  // получить информацию оюзере по его id
+  rpc GetUserById (GetUserRequest) returns (GetUserResponse);
+  // Проверка работоспособности сервиса
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+message GetUserRequest {
+  string user_id = 1;
+}
+
+message GetUserResponse {
+  string user_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  bool is_active = 4;
+  string last_activity = 5;
+}
+
+message PingRequest {
+
+}
+
+message PingResponse {
+  string message = 1;
+}

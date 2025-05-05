@@ -17,3 +17,6 @@ db:
   redis:
     host: "redis"
     port: "6379"
+grpc_server:
+  port: 50051
+  network: "tcp"
