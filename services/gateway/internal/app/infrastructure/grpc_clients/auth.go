@@ -4,13 +4,13 @@ import (
 	"context"
 	"log"
 
+	"github.com/VovkaGoodwin/microservices-cource/services/gateway/internal/app/domain/contracts/clients"
+	"github.com/VovkaGoodwin/microservices-cource/services/gateway/proto/auth"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-
-	"gateway/proto/auth"
 )
 
-func NewAuthClient() auth.AuthServiceClient {
+func NewAuthClient() clients.AuthServiceClient {
 	opts := grpc.WithTransportCredentials(insecure.NewCredentials())
 	conn, err := grpc.NewClient("auth-svc.auth.svc.cluster.local:50051", opts)
 	if err != nil {

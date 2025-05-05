@@ -1,0 +1,9 @@
+env: "local"
+db:
+  postgres:
+    host: "127.0.0.1"
+    port: "5432"
+    username: "root"
+    ssl_mode: "disable"
+    db_name: "user"
+    password: "123456" #used for study only

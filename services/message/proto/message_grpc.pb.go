@@ -28,8 +28,11 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MessageServiceClient interface {
+	// получить сообщения пользователя по его id
 	GetMessagesByUserId(ctx context.Context, in *GetMessagesByUserIdRequest, opts ...grpc.CallOption) (*GetMessagesByUserIdResponse, error)
+	// отправить сообщение
 	SendMessage(ctx context.Context, in *SendMessageRequest, opts ...grpc.CallOption) (*SendMessageResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
 }
 
@@ -75,8 +78,11 @@ func (c *messageServiceClient) Ping(ctx context.Context, in *PingRequest, opts .
 // All implementations must embed UnimplementedMessageServiceServer
 // for forward compatibility.
 type MessageServiceServer interface {
+	// получить сообщения пользователя по его id
 	GetMessagesByUserId(context.Context, *GetMessagesByUserIdRequest) (*GetMessagesByUserIdResponse, error)
+	// отправить сообщение
 	SendMessage(context.Context, *SendMessageRequest) (*SendMessageResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
 	mustEmbedUnimplementedMessageServiceServer()
 }

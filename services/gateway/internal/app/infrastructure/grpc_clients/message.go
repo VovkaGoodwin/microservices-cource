@@ -4,13 +4,13 @@ import (
 	"context"
 	"log"
 
+	"github.com/VovkaGoodwin/microservices-cource/services/gateway/internal/app/domain/contracts/clients"
+	"github.com/VovkaGoodwin/microservices-cource/services/gateway/proto/message"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-
-	"gateway/proto/message"
 )
 
-func NewMessageClient() message.MessageServiceClient {
+func NewMessageClient() clients.MessageServiceClient {
 	opts := grpc.WithTransportCredentials(insecure.NewCredentials())
 	conn, err := grpc.NewClient("message-svc.message.svc.cluster.local:50051", opts)
 	if err != nil {

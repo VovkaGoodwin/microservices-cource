@@ -1,19 +1,17 @@
 package main
 
 import (
-	"auth/internal/app"
-	"auth/internal/config"
 	"context"
+
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app"
 )
 
 func main() {
 	ctx := context.Background()
-	cfg, err := config.NewConfig()
+	container := app.NewMainApp()
+
+	err := container.Start(ctx)
 	if err != nil {
 		panic(err)
 	}
-
-	mainApp := app.New(ctx, cfg)
-
-	mainApp.Start(ctx, cfg)
 }
