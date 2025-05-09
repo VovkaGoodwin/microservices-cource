@@ -1,92 +1,63 @@
 package app
 
 import (
-	"log/slog"
-	"net/http"
-	"os"
-
-	"github.com/gin-gonic/gin"
-	"github.com/jmoiron/sqlx"
-	"google.golang.org/grpc"
-
-	"auth/internal/app/application/interactors"
-	"auth/internal/app/infrastructure/database"
-	"auth/internal/app/presentation/grpc_handler"
-	"auth/internal/app/presentation/http_handler"
-	"auth/internal/config"
-	pb "auth/proto"
+	"github.com/VovkaGoodwin/microservices-cource/pkg/app"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/application/interactors/healthcheck"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/application/usecases/authenticate"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/application/usecases/check_token"
+	tokenService "github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/domain/contracts/services/impls/token"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/infrastructure/database"
+	tokenRedisRepository "github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/infrastructure/repositories/token/redis"
+	userInmemoryRepository "github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/infrastructure/repositories/user/inmemory"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/presentation/grpc_server"
+	"github.com/VovkaGoodwin/microservices-cource/services/auth/internal/app/presentation/http_server"
+	"go.uber.org/fx"
 )
 
-const (
-	envLocal = "local"
-	envDev   = "development"
-	envProd  = "production"
-)
-
-func initLog(cfg *config.Config) *slog.Logger {
-	var log *slog.Logger
-
-	switch cfg.Env {
-	case envLocal:
-		log = slog.New(
-			slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
-		)
-	case envDev:
-		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelDebug}),
-		)
-	case envProd:
-		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}),
-		)
-	default:
-		log = slog.New(
-			slog.NewJSONHandler(os.Stdout, &slog.HandlerOptions{Level: slog.LevelInfo}),
-		)
-	}
-
-	return log
+func initDb() fx.Option {
+	return fx.Module("database",
+		fx.Provide(
+			database.NewPostgresDb,
+			database.NewRedisDb,
+		))
 }
 
-func initHttpHandler(
-	cfg *config.Config,
-	db *sqlx.DB,
-) *gin.Engine {
-	handler := http_handler.NewHandler(
-		cfg,
-		interactors.NewHealthcheck(cfg, db),
+func initServices() fx.Option {
+	return fx.Module("services",
+		tokenService.Module,
 	)
-
-	return handler.InitRoutes()
 }
 
-func initHttpServer(cfg *config.Config, handler http.Handler) *http.Server {
-	server := &http.Server{
-		Addr:         cfg.HTTPServer.Address,
-		ReadTimeout:  cfg.HTTPServer.Timeout,
-		WriteTimeout: cfg.HTTPServer.Timeout,
-		IdleTimeout:  cfg.HTTPServer.IdleTimeout,
-		Handler:      handler,
-	}
-
-	return server
+func initInfrastructureLevel() fx.Option {
+	return fx.Module("infrastructure",
+		tokenRedisRepository.Module,
+		userInmemoryRepository.Module,
+	)
 }
 
-func initRpcHandler(_ *config.Config) *grpc_handler.AuthServer {
-	return grpc_handler.NewAuthServer()
+func initPresentationLayer() fx.Option {
+	return fx.Module("presentation",
+		http_server.Module,
+		grpc_server.Module,
+	)
 }
 
-func initRpcServer(_ *config.Config, authServer *grpc_handler.AuthServer) *grpc.Server {
-	server := grpc.NewServer()
-	pb.RegisterAuthServiceServer(server, authServer)
-	return server
+func initApplicationLayer() fx.Option {
+	return fx.Module("application",
+		check_token.Module,
+		authenticate.Module,
+		healthcheck.Module,
+	)
 }
 
-func initPostgres(cfg *config.Config, log *slog.Logger) *sqlx.DB {
-	db, err := database.NewPostgresDb(cfg, log)
-	if err != nil {
-		panic("database initializing" + err.Error())
-	}
+func initRunners() fx.Option {
+	return fx.Module("runners",
+		fx.Provide(func(http *http_server.HttpServer, grpc *grpc_server.GrpcServer) map[string]app.Runner {
+			runners := make(map[string]app.Runner)
+			runners["http"] = http
+			runners["grpc"] = grpc
 
-	return db
+			return runners
+		}),
+	)
 }

@@ -19,15 +19,19 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	AuthService_CheckToken_FullMethodName = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/CheckToken"
-	AuthService_Ping_FullMethodName       = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/Ping"
+	AuthService_CheckToken_FullMethodName   = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/CheckToken"
+	AuthService_Authenticate_FullMethodName = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/Authenticate"
+	AuthService_Ping_FullMethodName         = "/github.com.vovkagoodwin.microservices_cource.proto.api.auth.AuthService/Ping"
 )
 
 // AuthServiceClient is the client API for AuthService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AuthServiceClient interface {
+	// Проверка валидности токена
 	CheckToken(ctx context.Context, in *CheckTokenRequest, opts ...grpc.CallOption) (*CheckTokenResponse, error)
+	Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
 }
 
@@ -49,6 +53,16 @@ func (c *authServiceClient) CheckToken(ctx context.Context, in *CheckTokenReques
 	return out, nil
 }
 
+func (c *authServiceClient) Authenticate(ctx context.Context, in *AuthenticateRequest, opts ...grpc.CallOption) (*AuthenticateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AuthenticateResponse)
+	err := c.cc.Invoke(ctx, AuthService_Authenticate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *authServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PingResponse)
@@ -63,7 +77,10 @@ func (c *authServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...g
 // All implementations must embed UnimplementedAuthServiceServer
 // for forward compatibility.
 type AuthServiceServer interface {
+	// Проверка валидности токена
 	CheckToken(context.Context, *CheckTokenRequest) (*CheckTokenResponse, error)
+	Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
 	mustEmbedUnimplementedAuthServiceServer()
 }
@@ -77,6 +94,9 @@ type UnimplementedAuthServiceServer struct{}
 
 func (UnimplementedAuthServiceServer) CheckToken(context.Context, *CheckTokenRequest) (*CheckTokenResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckToken not implemented")
+}
+func (UnimplementedAuthServiceServer) Authenticate(context.Context, *AuthenticateRequest) (*AuthenticateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Authenticate not implemented")
 }
 func (UnimplementedAuthServiceServer) Ping(context.Context, *PingRequest) (*PingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Ping not implemented")
@@ -120,6 +140,24 @@ func _AuthService_CheckToken_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _AuthService_Authenticate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AuthenticateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AuthServiceServer).Authenticate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: AuthService_Authenticate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AuthServiceServer).Authenticate(ctx, req.(*AuthenticateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _AuthService_Ping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(PingRequest)
 	if err := dec(in); err != nil {
@@ -148,6 +186,10 @@ var AuthService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckToken",
 			Handler:    _AuthService_CheckToken_Handler,
+		},
+		{
+			MethodName: "Authenticate",
+			Handler:    _AuthService_Authenticate_Handler,
 		},
 		{
 			MethodName: "Ping",

@@ -27,7 +27,9 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
+	// получить информацию оюзере по его id
 	GetUserById(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(ctx context.Context, in *PingRequest, opts ...grpc.CallOption) (*PingResponse, error)
 }
 
@@ -63,7 +65,9 @@ func (c *userServiceClient) Ping(ctx context.Context, in *PingRequest, opts ...g
 // All implementations must embed UnimplementedUserServiceServer
 // for forward compatibility.
 type UserServiceServer interface {
+	// получить информацию оюзере по его id
 	GetUserById(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	// Проверка работоспособности сервиса
 	Ping(context.Context, *PingRequest) (*PingResponse, error)
 	mustEmbedUnimplementedUserServiceServer()
 }

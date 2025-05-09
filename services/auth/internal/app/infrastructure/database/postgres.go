@@ -2,12 +2,12 @@ package database
 
 import (
 	"fmt"
-	"github.com/jmoiron/sqlx"
-	_ "github.com/lib/pq"
 	"log/slog"
 	"time"
 
-	"auth/internal/config"
+	"github.com/VovkaGoodwin/microservices-cource/pkg/config"
+	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 )
 
 func NewPostgresDb(cfg *config.Config, log *slog.Logger) (*sqlx.DB, error) {
